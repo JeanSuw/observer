@@ -28,12 +28,16 @@ npm i mysql2
 You must use command-line to navigate the database.
 
 ## [Credits](#table-of-content)
+Without these guidances, my website would not exist.
 
 Packages
 * [Node MySQL 2](https://www.npmjs.com/package/mysql2)
 * [Inquirer.js](https://www.npmjs.com/package/inquirer/v/8.2.4)
 * [console.table](https://www.npmjs.com/package/console.table)
 
+Tutorials
+* 15-Ins_Schema
+* 19-Ins_Foreign-Primary-Key
 
 
 [Return back to Title](#observer)
