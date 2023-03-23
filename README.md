@@ -30,12 +30,12 @@ You must use command-line to navigate the database.
 ## [Credits](#table-of-content)
 Without these guidances, my website would not exist.
 
-Packages
+Packages tutorials
 * [Node MySQL 2](https://www.npmjs.com/package/mysql2)
 * [Inquirer.js](https://www.npmjs.com/package/inquirer/v/8.2.4)
 * [console.table](https://www.npmjs.com/package/console.table)
 
-Tutorials
+Tutorials from Bootcamp course files
 * 15-Ins_Schema
 * 19-Ins_Foreign-Primary-Key
 
