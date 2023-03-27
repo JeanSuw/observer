@@ -38,6 +38,7 @@ Packages tutorials
 Tutorials from Bootcamp course files
 * 15-Ins_Schema
 * 19-Ins_Foreign-Primary-Key
+* [How to end sql?](https://stackoverflow.com/questions/19563474/how-to-close-database-connection-in-node-js)
 
 
 [Return back to Title](#observer)
