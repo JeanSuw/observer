@@ -27,7 +27,14 @@ const connection = mysql.createConnection({
 
 function viewAllDepartment() {
   // Show department
-  // id | department_name 
+  // id | department_name
+  var queryText = `SELECT * FROM department`;
+  connection.query(queryText, (err, res) => {
+    console.log("View all department");
+    console.table(res);
+    // go back to the main menu somehow
+  }
+  );
 }
 
 function viewAllRoles () {
@@ -58,7 +65,6 @@ function addDepartment() {
     if (error.isTtyError) {
       console.log("Prompt couldn't be rendered in the current environment");
     } else {
-      // Something else went wrong
       console.log("Check method in addDepartment()");
     }
     });
