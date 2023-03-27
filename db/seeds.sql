@@ -1,5 +1,5 @@
-INSERT INTO department (name)
-VALUES ("Sales");
-        ("Engineering");
-        ("Finance");
+INSERT INTO department (department_name)
+VALUES ("Sales"),
+        ("Engineering"),
+        ("Finance"),
         ("Legal");

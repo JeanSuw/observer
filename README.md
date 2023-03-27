@@ -43,5 +43,8 @@ Tutorials from Bootcamp course files
 * [SQL: Insert to query](https://stackoverflow.com/questions/49487104/mysql2-inserting-values-nodejs)
 * [How to end sql?](https://stackoverflow.com/questions/19563474/how-to-close-database-connection-in-node-js)
 * [Console.table: More examples](https://developer.mozilla.org/en-US/docs/Web/API/console/table)
+* [Can a foreign key reference multiple tables?](https://www.quora.com/Can-a-foreign-key-reference-multiple-tables)
+* [A foreign key reference multiple tables examples](https://www.sqlservercentral.com/forums/topic/foreign-key-references-multiple-tables)
+* [mysql ECONNREFUSED](https://stackoverflow.com/questions/30266221/node-js-mysql-error-connect-econnrefused)
 
 [Return back to Title](#observer)

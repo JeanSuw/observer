@@ -1,22 +1,30 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-const cTable = require('console.table');
+require('console.table');
+
 
 const menu = [
     {
     name: 'homepage',
     type: 'list',
-    message: `Hi! Wecome to Observer. What would you like to do today?`,
+    message: `What would you like to do today?`,
     choices: ['View all Departments', 'View all roles', 'View all Employees', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an employee role', 'quit'],
     default: 'Move up and down using error to view more'
     },
 ];
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: process.env.DB_USER, // root?
+    host: process.env.DB_USER,
+    user: 'root',
     database: 'company_db',
-    password: process.env.DB_PASSWORD
+    password: process.env.DB_PASSWORD,
+    port: 3306
+});
+
+connection.connect(function (err) {
+  if (err) throw err;
+  console.log('Hi! Wecome to Observer.');
+  mainMenu();
 });
 
 function mainMenu(){
@@ -45,10 +53,10 @@ function mainMenu(){
         updateEmployee();
         break;
       case 'quit':
-        console.log("See ya");
-        connection.end();
-        break;
-    }
+        console.log("Bye");
+        return connection.end();
+        
+    } 
   })
   .catch((error) => {
     if (error.isTtyError) {
@@ -56,8 +64,7 @@ function mainMenu(){
     } else {
       // Something else went wrong
       console.log("Check one of the method in mainMenu");
-    }
-    });
+    }});
 }
 
 function viewAllDepartment() {
@@ -66,8 +73,10 @@ function viewAllDepartment() {
   var queryText = `SELECT * FROM department`;
   connection.query(queryText, (err, res) => {
     console.log("Viewing all department");
+    console.log(res);
     console.table(res);
     mainMenu();
+    
   });
 }
 
