@@ -117,7 +117,6 @@ function addDepartment() {
       console.log("Check method in addDepartment()");
     }
   });
-
 }
 
 function addRoles() {

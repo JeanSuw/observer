@@ -42,6 +42,6 @@ Tutorials from Bootcamp course files
 * [SQL: INSERT INTO Statement](https://www.w3schools.com/sql/sql_insert.asp)
 * [SQL: Insert to query](https://stackoverflow.com/questions/49487104/mysql2-inserting-values-nodejs)
 * [How to end sql?](https://stackoverflow.com/questions/19563474/how-to-close-database-connection-in-node-js)
-
+* [Console.table: More examples](https://developer.mozilla.org/en-US/docs/Web/API/console/table)
 
 [Return back to Title](#observer)
