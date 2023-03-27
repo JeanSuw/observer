@@ -47,16 +47,19 @@ function addDepartment() {
     message: 'What is the name of the department?',
     name: 'addDept',
   }];
+
   inquirer.prompt(askDeptName)
   .then((answers) => {
-    // Use user feedback for... whatever!!
+    // Create a query to insert new name for a department
+    var query = `INSERT INTO department`;
+
   })
   .catch((error) => {
     if (error.isTtyError) {
       console.log("Prompt couldn't be rendered in the current environment");
     } else {
       // Something else went wrong
-      console.log("One of the method is not working. Check one of them");
+      console.log("Check method in addDepartment()");
     }
     });
 

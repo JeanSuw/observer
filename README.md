@@ -38,6 +38,9 @@ Packages tutorials
 Tutorials from Bootcamp course files
 * 15-Ins_Schema
 * 19-Ins_Foreign-Primary-Key
+* [MySql: How to insert data](https://www.w3schools.com/nodejs/nodejs_mysql_insert.asp)
+* [SQL: INSERT INTO Statement](https://www.w3schools.com/sql/sql_insert.asp)
+* [SQL: Insert to query](https://stackoverflow.com/questions/49487104/mysql2-inserting-values-nodejs)
 * [How to end sql?](https://stackoverflow.com/questions/19563474/how-to-close-database-connection-in-node-js)
 
 
