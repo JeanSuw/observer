@@ -68,8 +68,7 @@ function viewAllDepartment() {
     console.log("Viewing all department");
     console.table(res);
     mainMenu();
-  }
-  );
+  });
 }
 
 function viewAllRoles () {
@@ -77,16 +76,21 @@ function viewAllRoles () {
   // id | title | Department | Salary
   var queryText = `SELECT * FROM role`;
   connection.query(queryText, (err, res) => {
-    console.log("Viewing all roles");
+    console.log("Viewing all roles:");
     console.table(res);
     mainMenu();
-  }
-  );
+  });
 }
 
 function viewAllEmployee() {
   // show employee database
   // id |first_name|last_name|title|department|salary|manager
+  var queryText = `SELECT * FROM employee`;
+  connection.query(queryText, (err, res) => {
+    console.log("Viewing all employees:");
+    console.table(res);
+    mainMenu();
+  });
 }
 
 function addDepartment() {
@@ -94,14 +98,17 @@ function addDepartment() {
   const askDeptName = [{
     type: 'input',
     message: 'What is the name of the department?',
-    name: 'addDept',
+    name: 'newDept',
   }];
 
   inquirer.prompt(askDeptName)
   .then((answers) => {
     // Create a query to insert new name for a department
-    var query = `INSERT INTO department`;
-
+    var queryText = `INSERT INTO department (name) VALUE (?)`;
+    connection.query(queryText, [answers.newDept] , (err, res) => {
+      console.log(`Your response, ${answers.newDept}, is added to the database`);
+      mainMenu();
+    });
   })
   .catch((error) => {
     if (error.isTtyError) {
@@ -109,7 +116,7 @@ function addDepartment() {
     } else {
       console.log("Check method in addDepartment()");
     }
-    });
+  });
 
 }
 
