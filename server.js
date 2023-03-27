@@ -20,9 +20,9 @@ const menu = [
 
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
+    user: process.env.DB_USER, // root?
     database: 'company_db',
-    password: ''
+    password: process.env.DB_PASSWORD
 });
 
 function viewAllDepartment() {
