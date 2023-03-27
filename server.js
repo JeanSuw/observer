@@ -27,22 +27,22 @@ function mainMenu(){
         viewAllDepartment();
         break;
       case 'View all roles':
-        
+        viewAllRoles();
         break;
       case 'View all Employees':
-        
+        viewAllEmployee();
         break;
       case 'Add a Department':
-        
+        addDepartment();
         break;
       case 'Add a Role':
-        
+        addRoles();
         break; 
       case 'Add an Employee':
-        
+        addEmployee();
         break;
       case 'Update an employee role':
-        
+        updateEmployee();
         break;
       case 'quit':
         console.log("See ya");
@@ -65,7 +65,7 @@ function viewAllDepartment() {
   // id | department_name
   var queryText = `SELECT * FROM department`;
   connection.query(queryText, (err, res) => {
-    console.log("View all department");
+    console.log("Viewing all department");
     console.table(res);
     mainMenu();
   }
@@ -75,9 +75,16 @@ function viewAllDepartment() {
 function viewAllRoles () {
   // Show roles
   // id | title | Department | Salary
+  var queryText = `SELECT * FROM role`;
+  connection.query(queryText, (err, res) => {
+    console.log("Viewing all roles");
+    console.table(res);
+    mainMenu();
+  }
+  );
 }
 
-function viewAllEmployee () {
+function viewAllEmployee() {
   // show employee database
   // id |first_name|last_name|title|department|salary|manager
 }
@@ -151,7 +158,7 @@ function addEmployee() {
 }
 
 // Update exisiting employee's info
-function updateEmployee(params) {
+function updateEmployee() {
   //  prompted to select an employee to update and their new role and this information is updated in the database
   
 }
