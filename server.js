@@ -4,18 +4,12 @@ const cTable = require('console.table');
 
 const menu = [
     {
-    name: 'mainMenu',
+    name: 'homepage',
     type: 'list',
     message: `Hi! Wecome to Observer. What would you like to do today?`,
     choices: ['View all Departments', 'View all roles', 'View all Employees', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an employee role', 'quit'],
     default: 'Move up and down using error to view more'
     },
-    {
-      name: '',
-      type: '',
-      message: ``,
-      default: ''
-    }
 ];
 
 const connection = mysql.createConnection({
@@ -25,6 +19,47 @@ const connection = mysql.createConnection({
     password: process.env.DB_PASSWORD
 });
 
+function mainMenu(){
+  inquirer.prompt(menu)
+  .then((answers) => {
+    switch(answers.homepage) {
+      case 'View all Departments':
+        viewAllDepartment();
+        break;
+      case 'View all roles':
+        
+        break;
+      case 'View all Employees':
+        
+        break;
+      case 'Add a Department':
+        
+        break;
+      case 'Add a Role':
+        
+        break; 
+      case 'Add an Employee':
+        
+        break;
+      case 'Update an employee role':
+        
+        break;
+      case 'quit':
+        console.log("See ya");
+        connection.end();
+        break;
+    }
+  })
+  .catch((error) => {
+    if (error.isTtyError) {
+      console.log("Prompt couldn't be rendered in the current environment");
+    } else {
+      // Something else went wrong
+      console.log("Check one of the method in mainMenu");
+    }
+    });
+}
+
 function viewAllDepartment() {
   // Show department
   // id | department_name
@@ -32,7 +67,7 @@ function viewAllDepartment() {
   connection.query(queryText, (err, res) => {
     console.log("View all department");
     console.table(res);
-    // go back to the main menu somehow
+    mainMenu();
   }
   );
 }
@@ -73,22 +108,13 @@ function addDepartment() {
 
 function addRoles() {
   // prompted to enter the name, salary, and department for the role and that role is added to the database
-
-}
-
-function addEmployee() {
-  // prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
-
-}
-
-// Update exisiting employee's info
-function updateEmployee(params) {
-  //  prompted to select an employee to update and their new role and this information is updated in the database
-  
-}
-
-
-inquirer.prompt([
+  const roleQuestion = [{
+    name: '',
+    type: '',
+    message: ``,
+    default: ''
+  }];
+  inquirer.prompt([
     /* Pass your questions in here */
   ])
   .then((answers) => {
@@ -102,3 +128,32 @@ inquirer.prompt([
       console.log("One of the method is not working. Check one of them");
     }
     });
+
+}
+
+function addEmployee() {
+  // prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+  inquirer.prompt([
+    /* Pass your questions in here */
+  ])
+  .then((answers) => {
+    // Use user feedback for... whatever!!
+  })
+  .catch((error) => {
+    if (error.isTtyError) {
+      console.log("Prompt couldn't be rendered in the current environment");
+    } else {
+      // Something else went wrong
+      console.log("One of the method is not working. Check one of them");
+    }
+    });
+
+}
+
+// Update exisiting employee's info
+function updateEmployee(params) {
+  //  prompted to select an employee to update and their new role and this information is updated in the database
+  
+}
+
+
