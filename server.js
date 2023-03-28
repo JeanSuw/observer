@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 require('console.table');
+require('dotenv').config();
 
 
 const menu = [
@@ -16,13 +17,12 @@ const menu = [
 const connection = mysql.createConnection({
     host: process.env.DB_USER,
     user: 'root',
-    database: 'company_db',
-    password: process.env.DB_PASSWORD,
-    port: 3306
+    password: process.env.DB_PASSWORD, 
+    database: process.env.DB_NAME,
 });
 
 connection.connect(function (err) {
-  if (err) throw err;
+  if (err) console.log(err);
   console.log('Hi! Wecome to Observer.');
   mainMenu();
 });
@@ -73,10 +73,8 @@ function viewAllDepartment() {
   var queryText = `SELECT * FROM department`;
   connection.query(queryText, (err, res) => {
     console.log("Viewing all department");
-    console.log(res);
     console.table(res);
     mainMenu();
-    
   });
 }
 
