@@ -26,6 +26,18 @@ npm i mysql2
 
 ## [Usage](#table-of-content)
 You must use command-line to navigate the database.
+Before navigating to main menu to view employee's database, you must type in the following commands to get database.
+
+```bash
+mysql -u root -p
+// It will ask you to enter the sql password
+
+// Once you enter sql password you can type in these two command one line at a time
+source db/schema.sql
+source db/seeds.sql
+// Once you are done, you can type "quit".
+quit
+```
 
 ## [Credits](#table-of-content)
 Without these guidances, my website would not exist.
@@ -46,6 +58,7 @@ Tutorials from Bootcamp course files
 * [Can a foreign key reference multiple tables?](https://www.quora.com/Can-a-foreign-key-reference-multiple-tables)
 * [A foreign key reference multiple tables examples](https://www.sqlservercentral.com/forums/topic/foreign-key-references-multiple-tables)
 * [mysql ECONNREFUSED](https://stackoverflow.com/questions/30266221/node-js-mysql-error-connect-econnrefused)
+* [JOIN IN](https://dba.stackexchange.com/questions/129023/selecting-data-from-another-table-using-a-foreign-key)
 * [Random name generator](https://randomwordgenerator.com/name.php)
 
 [Return back to Title](#observer)
