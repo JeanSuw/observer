@@ -103,9 +103,9 @@ function addDepartment() {
   inquirer.prompt(askDeptName)
   .then((answers) => {
     // Create a query to insert new name for a department
-    var queryText = `INSERT INTO department (name) VALUE (?)`;
-    connection.query(queryText, [answers.newDept] , (err, res) => {
-      console.log(`Your response, ${answers.newDept}, is added to the database`);
+    var queryText = `INSERT INTO department (department_name) VALUE (?)`;
+    connection.query(queryText, [answers.newDept] , function (err, res) {
+      console.log(`Your response, ${answers.newDept}, is added to the database. See 'View all Department' to see the update`);
       mainMenu();
     });
   })

@@ -15,4 +15,4 @@ VALUES  ('Lenora', 'Fitzpatrick', 3, NULL),
         ('Leroy', 'Davenport', 3, NULL),
         ('Jan', 'Black', 2, NULL),
         ('Laurie', 'Clarke', 1, NULL),
-        ('Mamie', 'Pearson', 4, NULL)
+        ('Mamie', 'Pearson', 4, NULL);
