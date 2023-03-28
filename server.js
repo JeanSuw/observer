@@ -66,8 +66,6 @@ function mainMenu(){
 }
 
 function viewAllDepartment() {
-  // Show department
-  // id | department_name
   var queryText = `SELECT * FROM department`;
   connection.query(queryText, (err, res) => {
     console.log(`\nViewing all department:\n`);
@@ -77,9 +75,7 @@ function viewAllDepartment() {
 }
 
 function viewAllRoles () {
-  // Show roles
-  // id | title | Department | Salary
-  var queryText = `SELECT * FROM role`;
+  var queryText = `SELECT role.id, role.title, role.salary, department.department_name FROM department INNER JOIN role ON department.id=role.department_id`;
   connection.query(queryText, (err, res) => {
     console.log(`\nViewing all roles:\n`);
     console.table(res);
@@ -88,9 +84,7 @@ function viewAllRoles () {
 }
 
 function viewAllEmployee() {
-  // show employee database
-  // id |first_name|last_name|title|department|salary|manager
-  var queryText = `SELECT * FROM employee`;
+  var queryText = `SELECT employee.id, employee.first_name, employee.last_name, role.title, employee.manager_id FROM role INNER JOIN employee ON role.id=employee.role_id;`;
   connection.query(queryText, (err, res) => {
     console.log("\nViewing all employees:\n");
     console.table(res);
