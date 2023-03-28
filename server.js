@@ -172,9 +172,27 @@ function addRoles() {
 
 function addEmployee() {
   // prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
-  inquirer.prompt([
-    /* Pass your questions in here */
-  ])
+  const empQuestions = [
+    {
+    name: 'firstName',
+    type: 'input',
+    message: `What is his/her/their first name?`,
+    },
+    {
+      name: 'lastName',
+      type: 'input',
+      message: `What is his/her/their last name?`,
+    },
+    {
+      name: 'role',
+      type: 'list',
+      message: `What is his/her/their role?`,
+      choices: [],
+      default: 'Pick one using up and down key'
+    }
+  ];
+  
+  inquirer.prompt(empQuestions)
   .then((answers) => {
     // Use user feedback for... whatever!!
   })
@@ -182,8 +200,7 @@ function addEmployee() {
     if (error.isTtyError) {
       console.log("Prompt couldn't be rendered in the current environment");
     } else {
-      // Something else went wrong
-      console.log("");
+      console.log("Check addEmployee function. ");
     }
   });
 }
