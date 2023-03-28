@@ -3,7 +3,6 @@ const mysql = require('mysql2');
 require('console.table');
 require('dotenv').config();
 
-
 const menu = [
     {
     name: 'homepage',
@@ -55,7 +54,6 @@ function mainMenu(){
       case 'quit':
         console.log("Bye");
         return connection.end();
-        
     } 
   })
   .catch((error) => {
@@ -72,7 +70,7 @@ function viewAllDepartment() {
   // id | department_name
   var queryText = `SELECT * FROM department`;
   connection.query(queryText, (err, res) => {
-    console.log("Viewing all department");
+    console.log(`Viewing all department:\n`);
     console.table(res);
     mainMenu();
   });
@@ -83,7 +81,7 @@ function viewAllRoles () {
   // id | title | Department | Salary
   var queryText = `SELECT * FROM role`;
   connection.query(queryText, (err, res) => {
-    console.log("Viewing all roles:");
+    console.log(`Viewing all roles:\n`);
     console.table(res);
     mainMenu();
   });
