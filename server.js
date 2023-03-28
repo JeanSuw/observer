@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const mysql = require('mysql2');
 require('console.table');
 require('dotenv').config();
-
+var deptOption = [];
 const menu = [
     {
     name: 'homepage',
@@ -32,6 +32,7 @@ function mainMenu(){
     switch(answers.homepage) {
       case 'View all Departments':
         viewAllDepartment();
+        
         break;
       case 'View all roles':
         viewAllRoles();
@@ -83,6 +84,7 @@ function viewAllRoles () {
   });
 }
 
+// Salary?
 function viewAllEmployee() {
   var queryText = `SELECT employee.id, employee.first_name, employee.last_name, role.title, employee.manager_id FROM role INNER JOIN employee ON role.id=employee.role_id;`;
   connection.query(queryText, (err, res) => {
@@ -119,25 +121,50 @@ function addDepartment() {
 }
 
 function addRoles() {
+  var queryText = `SELECT * FROM department`;
+  connection.query(queryText, (err, res) => {
+    for(var i = 0; i < res.length; i ++){
+      deptOption.push(res[i].department_name);
+      //console.log(`${res[i].id} | ${res[i].department_name}`);
+    }
+    //console.log(deptOption);
+  });
   // prompted to enter the name, salary, and department for the role and that role is added to the database
-  const roleQuestion = [{
-    name: '',
-    type: '',
-    message: ``,
-    default: ''
-  }];
-  inquirer.prompt([
-    /* Pass your questions in here */
-  ])
+  const roleQuestions = [
+    {
+    name: 'newRole',
+    type: 'input',
+    message: `What is the name of the role?`,
+    default: 'Type something'
+    },
+    {
+      name: 'newSalary',
+      type: 'input',
+      message: `What is the salary of the role?`,
+      default: 'Insert numbers only. No dollar symbols'
+    },
+    {
+      name: 'pickedDepartment',
+      type: 'list',
+      message: `Which department does the role belong to?`,
+      choices: deptOption,
+      default: 'Pick one using up and down key'
+    }
+  ];
+
+  inquirer.prompt(roleQuestions)
   .then((answers) => {
-    // Use user feedback for... whatever!!
+    var queryText = `INSERT INTO role(title,salary,department_id) VALUES  (?,?,?)`;
+    var index = deptOption.indexOf(answers.pickedDepartment)+1;
+    connection.query(queryText, [answers.newRole, answers.newSalary, index] , function (err, res) {
+      mainMenu();
+    });
   })
   .catch((error) => {
     if (error.isTtyError) {
       console.log("Prompt couldn't be rendered in the current environment");
     } else {
-      // Something else went wrong
-      console.log("One of the method is not working. Check one of them");
+      console.log("Check addRoles to check which one of the method is not working");
     }
     });
 
@@ -156,10 +183,9 @@ function addEmployee() {
       console.log("Prompt couldn't be rendered in the current environment");
     } else {
       // Something else went wrong
-      console.log("One of the method is not working. Check one of them");
+      console.log("");
     }
-    });
-
+  });
 }
 
 // Update exisiting employee's info
@@ -167,5 +193,3 @@ function updateEmployee() {
   //  prompted to select an employee to update and their new role and this information is updated in the database
   
 }
-
-
