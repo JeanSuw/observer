@@ -70,7 +70,7 @@ function viewAllDepartment() {
   // id | department_name
   var queryText = `SELECT * FROM department`;
   connection.query(queryText, (err, res) => {
-    console.log(`Viewing all department:\n`);
+    console.log(`\nViewing all department:\n`);
     console.table(res);
     mainMenu();
   });
@@ -81,7 +81,7 @@ function viewAllRoles () {
   // id | title | Department | Salary
   var queryText = `SELECT * FROM role`;
   connection.query(queryText, (err, res) => {
-    console.log(`Viewing all roles:\n`);
+    console.log(`\nViewing all roles:\n`);
     console.table(res);
     mainMenu();
   });
@@ -92,7 +92,7 @@ function viewAllEmployee() {
   // id |first_name|last_name|title|department|salary|manager
   var queryText = `SELECT * FROM employee`;
   connection.query(queryText, (err, res) => {
-    console.log("Viewing all employees:");
+    console.log("\nViewing all employees:\n");
     console.table(res);
     mainMenu();
   });

@@ -46,5 +46,6 @@ Tutorials from Bootcamp course files
 * [Can a foreign key reference multiple tables?](https://www.quora.com/Can-a-foreign-key-reference-multiple-tables)
 * [A foreign key reference multiple tables examples](https://www.sqlservercentral.com/forums/topic/foreign-key-references-multiple-tables)
 * [mysql ECONNREFUSED](https://stackoverflow.com/questions/30266221/node-js-mysql-error-connect-econnrefused)
+* [Random name generator](https://randomwordgenerator.com/name.php)
 
 [Return back to Title](#observer)
