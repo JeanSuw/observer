@@ -4,6 +4,7 @@ require('console.table');
 require('dotenv').config();
 var deptOption = [];
 var roleOption = [];
+var managerOpt = [];
 const menu = [
     {
     name: 'homepage',
@@ -179,16 +180,17 @@ function addEmployee() {
       roleOption.push(res[i].title);
       //console.log(`${res[i].id} | ${res[i].title}`);
     }
-    console.log(roleOption);
+    console.log(`Check roles: ${roleOption}`);
   });
-
   var queryText = `SELECT manager_id FROM employee`;
   connection.query(queryText, (err, res) => {
     for(var i = 0; i < res.length; i ++){
-      roleOption.push(res[i].title);
-      //console.log(`${res[i].id} | ${res[i].title}`);
+      if (res[i].title !== null){
+        managerOpt.push(res[i].manager_id);
+      }
     }
-    console.log(roleOption);
+    managerOpt.push(null);
+    console.log(`Check manager ${managerOpt}`);
   });
 
   const empQuestions = [
@@ -213,8 +215,8 @@ function addEmployee() {
       name: 'manager',
       type: 'list',
       message: `Who is the employee's manager?`,
-      choices: roleOption,
-      default: 'Pick one using up and down key'
+      choices: managerOpt,
+      default: 'Pick null if there is no manager'
     }
 
   ];
@@ -223,7 +225,7 @@ function addEmployee() {
   .then((answers) => {
     var queryText = `INSERT INTO employee (first_name, last_name, role_id,manager_id) VALUES  (?,?,?,?)`;
     var index = roleOption.indexOf(answers.role)+1;
-    connection.query(queryText, [answers.firstName, answers.lastName, index, ] , function (err, res) {
+    connection.query(queryText, [answers.firstName, answers.lastName, index, answers.manager] , function (err, res) {
       mainMenu();
     });
   })
