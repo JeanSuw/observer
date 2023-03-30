@@ -174,7 +174,7 @@ function addRoles() {
 
 function addEmployee() {
   // prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
-  var queryText = `SELECT role_title FROM role INNER JOIN employee ON role.id=employee.role_id`;
+  var queryText = `SELECT role.title FROM role INNER JOIN employee ON role.id=employee.role_id`;
   connection.query(queryText, (err, res) => {
     for(var i = 0; i < res.length; i ++){
       roleOption.push(res[i].title);
@@ -185,7 +185,7 @@ function addEmployee() {
   var queryText = `SELECT manager_id FROM employee`;
   connection.query(queryText, (err, res) => {
     for(var i = 0; i < res.length; i ++){
-      if (res[i].title !== null){
+      if (res[i].title !== ''){
         managerOpt.push(res[i].manager_id);
       }
     }
