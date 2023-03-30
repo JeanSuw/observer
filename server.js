@@ -3,6 +3,7 @@ const mysql = require('mysql2');
 require('console.table');
 require('dotenv').config();
 var deptOption = [];
+var roleOption = [];
 const menu = [
     {
     name: 'homepage',
@@ -172,6 +173,24 @@ function addRoles() {
 
 function addEmployee() {
   // prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+  var queryText = `SELECT role_title FROM role INNER JOIN employee ON role.id=employee.role_id`;
+  connection.query(queryText, (err, res) => {
+    for(var i = 0; i < res.length; i ++){
+      roleOption.push(res[i].title);
+      //console.log(`${res[i].id} | ${res[i].title}`);
+    }
+    console.log(roleOption);
+  });
+
+  var queryText = `SELECT manager_id FROM employee`;
+  connection.query(queryText, (err, res) => {
+    for(var i = 0; i < res.length; i ++){
+      roleOption.push(res[i].title);
+      //console.log(`${res[i].id} | ${res[i].title}`);
+    }
+    console.log(roleOption);
+  });
+
   const empQuestions = [
     {
     name: 'firstName',
@@ -187,14 +206,26 @@ function addEmployee() {
       name: 'role',
       type: 'list',
       message: `What is his/her/their role?`,
-      choices: [],
+      choices: roleOption,
+      default: 'Pick one using up and down key'
+    },
+    {
+      name: 'manager',
+      type: 'list',
+      message: `Who is the employee's manager?`,
+      choices: roleOption,
       default: 'Pick one using up and down key'
     }
+
   ];
   
   inquirer.prompt(empQuestions)
   .then((answers) => {
-    // Use user feedback for... whatever!!
+    var queryText = `INSERT INTO employee (first_name, last_name, role_id,manager_id) VALUES  (?,?,?,?)`;
+    var index = roleOption.indexOf(answers.role)+1;
+    connection.query(queryText, [answers.firstName, answers.lastName, index, ] , function (err, res) {
+      mainMenu();
+    });
   })
   .catch((error) => {
     if (error.isTtyError) {
