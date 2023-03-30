@@ -12,7 +12,7 @@ VALUES  ('Sales manager', 95000, 1),
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES  ('Lenora', 'Fitzpatrick', 3, NULL),
-        ('Leroy', 'Davenport', 3, 'Jimmie Mccann'),
+        ('Leroy', 'Davenport', 3, '1'),
         ('Jan', 'Black', 2, NULL),
-        ('Laurie', 'Clarke', 1, 'Maggie Greene'),
+        ('Laurie', 'Clarke', 1, '5'),
         ('Mamie', 'Pearson', 4, NULL);
