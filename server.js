@@ -218,7 +218,6 @@ function addEmployee() {
       choices: managerOpt,
       default: 'Pick null if there is no manager'
     }
-
   ];
   
   inquirer.prompt(empQuestions)
@@ -226,6 +225,7 @@ function addEmployee() {
     var queryText = `INSERT INTO employee (first_name, last_name, role_id,manager_id) VALUES  (?,?,?,?)`;
     var index = roleOption.indexOf(answers.role)+1;
     connection.query(queryText, [answers.firstName, answers.lastName, index, answers.manager] , function (err, res) {
+      console.log(`Check view all employee`);
       mainMenu();
     });
   })
@@ -233,7 +233,7 @@ function addEmployee() {
     if (error.isTtyError) {
       console.log("Prompt couldn't be rendered in the current environment");
     } else {
-      console.log("Check addEmployee function. ");
+      console.log("Check addEmployee function.");
     }
   });
 }
