@@ -5,6 +5,7 @@ require('dotenv').config();
 var deptOption = [];
 var roleOption = [];
 var managerOpt = [];
+var employeeOpt = [];
 const menu = [
     {
     name: 'homepage',
@@ -248,5 +249,39 @@ function addEmployee() {
 // Update exisiting employee's info
 function updateEmployee() {
   //  prompted to select an employee to update and their new role and this information is updated in the database
+  var queryText = `SELECT employee.first_name,employee.last_name  FROM employee`;
+  connection.query(queryText, (err, res) => {
+    for(var i = 0; i < res.length; i ++){
+      
+      employeeOpt.push();
+    }
+  });
+
+  const askToUpdate = [{
+    type: 'list',
+    message: `Which employee's role do you want to update?`,
+    choices: [],
+    name: 'empRole',
+  }];
+
+  inquirer.prompt(askToUpdate)
+  .then((answers) => {
+    // Create a query to insert new name for a department
+    var queryText = ``;
+    connection.query(queryText, [answers] , function (err, res) {
+      console.log(``);
+      mainMenu();
+    });
+  })
+  .catch((error) => {
+    if (error.isTtyError) {
+      console.log("Prompt couldn't be rendered in the current environment");
+    } else {
+      console.log("Check method in addDepartment()");
+    }
+  });
    
+}
+function generateNameChoice(){
+  
 }
