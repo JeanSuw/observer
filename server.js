@@ -277,7 +277,7 @@ function updateEmployee() {
     if (error.isTtyError) {
       console.log("Prompt couldn't be rendered in the current environment");
     } else {
-      console.log("Check method in addDepartment()");
+      console.log("Check method in update employee");
     }
   });
    
