@@ -178,21 +178,19 @@ function addEmployee() {
   connection.query(queryText, (err, res) => {
     for(var i = 0; i < res.length; i ++){
       roleOption.push(res[i].title);
-      //console.log(`${res[i].id} | ${res[i].title}`);
     }
-    console.log(`Check roles: ${roleOption}`);
   });
   var queryText = `SELECT manager_id FROM employee`;
   connection.query(queryText, (err, res) => {
     for(var i = 0; i < res.length; i ++){
-      if (res[i].title !== ''){
+      if (res[i].manager_id !== null){
         managerOpt.push(res[i].manager_id);
       }
     }
-    managerOpt.push(null);
-    console.log(`Check manager ${managerOpt}`);
+    managerOpt.push("Null");
   });
-
+  console.log(`Check roles: ${roleOption}`);
+  console.log(`Check manager ${managerOpt}`);
   const empQuestions = [
     {
     name: 'firstName',
@@ -224,8 +222,17 @@ function addEmployee() {
   .then((answers) => {
     var queryText = `INSERT INTO employee (first_name, last_name, role_id,manager_id) VALUES  (?,?,?,?)`;
     var index = roleOption.indexOf(answers.role)+1;
-    connection.query(queryText, [answers.firstName, answers.lastName, index, answers.manager] , function (err, res) {
+    var managerIndex;
+      if (answers.manager === "Null"){
+        managerIndex = null;
+      }else{
+        managerIndex = answers.manager;
+      }
+    connection.query(queryText, [answers.firstName, answers.lastName, index, managerIndex] , function (err, res) {
       console.log(`Check view all employee`);
+      // Reset the choices to avoid stackoverflow
+      roleOption = [];
+      managerOpt =[]; 
       mainMenu();
     });
   })
@@ -241,5 +248,5 @@ function addEmployee() {
 // Update exisiting employee's info
 function updateEmployee() {
   //  prompted to select an employee to update and their new role and this information is updated in the database
-  
+   
 }
