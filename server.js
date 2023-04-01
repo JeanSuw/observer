@@ -6,6 +6,8 @@ var deptOption = [];
 var roleOption = [];
 var managerOpt = [];
 var employeeOpt = [];
+var employeeUpdateOpt = [];
+
 const menu = [
     {
     name: 'homepage',
@@ -35,7 +37,6 @@ function mainMenu(){
     switch(answers.homepage) {
       case 'View all Departments':
         viewAllDepartment();
-        
         break;
       case 'View all roles':
         viewAllRoles();
@@ -53,7 +54,7 @@ function mainMenu(){
         addEmployee();
         break;
       case 'Update an employee role':
-        updateEmployee();
+        updateEmployee1();
         break;
       case 'quit':
         console.log("Bye");
@@ -247,23 +248,21 @@ function addEmployee() {
 }
 
 // Update exisiting employee's info
+// Not working
 function updateEmployee() {
   var refList = [];
   //  prompted to select an employee to update and their new role and this information is updated in the database
-  var queryText = `SELECT employee.first_name,employee.last_name  FROM employee`;
-  connection.query(queryText, (err, res) => {
+  var queryText = `SELECT * FROM employee`;
+  connection.query(queryText, function (err, res) {
     for(var i = 0; i < res.length; i ++){
-      refList.push(
-        {
-          empID: res[i].id,
-          fullName: `${res[i].first_name} ${res[i].last_name}`
-        }
-      );
-      employeeOpt.push(`${res[i].first_name} ${res[i].last_name}`);
+      var toString = `${res[i].first_name} ${res[i].last_name}`;
+      refList.push(0);
     }
   });
+  //console.log("refList" + refList);
+  console.log("Check refList" + refList);
 
-  queryText = `SELECT role.title FROM role INNER JOIN employee ON role.id=employee.role_id`;
+  var queryText = `SELECT role.title FROM role INNER JOIN employee ON role.id=employee.role_id`;
   connection.query(queryText, (err, res) => {
     for(var i = 0; i < res.length; i ++){
       roleOption.push(`${res[i].title}`);
@@ -307,6 +306,53 @@ function updateEmployee() {
     }
   });
    
+}
+// Not working
+function updateEmployee1(){
+  var queryText = `SELECT employee.first_name, employee.last_name FROM employee`;
+  connection.query(queryText, (err, res) => {
+    for(var i = 0; i < res.length; i ++){
+      employeeUpdateOpt.push(res[i].first_name);
+    }
+  });
+
+  var queryText = `SELECT role.title FROM role INNER JOIN employee ON role.id=employee.role_id`;
+  connection.query(queryText, (err, res) => {
+    for(var i = 0; i < res.length; i ++){
+      roleOption.push(res[i].title);
+    }
+    console.log(roleOption);
+  });
+
+  const askToUpdate = [
+    {
+      name: 'updateEmp',
+      type: 'list',
+      message: `Which employee's role do you want to update?`,
+      choices:  employeeUpdateOpt[0],
+      default: 'Press up and down to navigate'
+      
+    },
+    {
+      name: 'updateEmpRole',
+      type: 'list',
+      message: `Which role do you want to assign the selected employee?`,
+      choices: roleOption,
+      default: 'Press up and down to navigate'
+    },
+  ];
+  inquirer.prompt(askToUpdate)
+  .then((answers) => {
+    console.log('YOu select employee: '+ answers.updateEmp);
+  })
+  .catch((error) => {
+    if (error.isTtyError) {
+      console.log("Prompt couldn't be rendered in the current environment");
+    } else {
+      console.log("Check method in update employee");
+    }
+  });
+
 }
 
 function isExist(fullName, nameList){
