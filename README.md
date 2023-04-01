@@ -48,9 +48,8 @@ node server.js
 ```
 
 This walkthrough video will show you how to use Observer database.
-* [] ()
-
-
+* [QuickLink](https://drive.google.com/file/d/1ymGVyHSyxTF95Kel9ZNkKhnD7etEtI1D/view)
+* []()
 
 ## [Credits](#table-of-content)
 Without these guidances, my website would not exist.
