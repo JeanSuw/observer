@@ -24,6 +24,8 @@ npm i console.table
 npm i mysql2
 ```
 
+[Link to my github observer page](https://github.com/JeanSuw/observer)
+
 ## [Usage](#table-of-content)
 You must use command-line to navigate the database.
 Before navigating to main menu to view employee's database, you must type in the following commands to get database.
