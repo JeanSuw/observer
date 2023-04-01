@@ -181,7 +181,7 @@ function addEmployee() {
       roleOption.push(res[i].title);
     }
   });
-  var queryText = `SELECT manager_id FROM employee`;
+  queryText = `SELECT manager_id FROM employee`;
   connection.query(queryText, (err, res) => {
     for(var i = 0; i < res.length; i ++){
       if (res[i].manager_id !== null){
@@ -248,28 +248,54 @@ function addEmployee() {
 
 // Update exisiting employee's info
 function updateEmployee() {
+  var refList = [];
   //  prompted to select an employee to update and their new role and this information is updated in the database
   var queryText = `SELECT employee.first_name,employee.last_name  FROM employee`;
   connection.query(queryText, (err, res) => {
     for(var i = 0; i < res.length; i ++){
-      
-      employeeOpt.push();
+      refList.push(
+        {
+          empID: res[i].id,
+          fullName: `${res[i].first_name} ${res[i].last_name}`
+        }
+      );
+      employeeOpt.push(`${res[i].first_name} ${res[i].last_name}`);
     }
   });
 
-  const askToUpdate = [{
-    type: 'list',
-    message: `Which employee's role do you want to update?`,
-    choices: [],
-    name: 'empRole',
-  }];
+  queryText = `SELECT role.title FROM role INNER JOIN employee ON role.id=employee.role_id`;
+  connection.query(queryText, (err, res) => {
+    for(var i = 0; i < res.length; i ++){
+      roleOption.push(`${res[i].title}`);
+    }
+  });
+
+  const askToUpdate = [
+    {
+      type: 'list',
+      message: `Which employee's role do you want to update?`,
+      choices: employeeOpt,
+      name: 'updateEmp',
+    },
+    {
+      type: 'list',
+      message: `Which role do you want to assign the selected employee?`,
+      choices: roleOption,
+      name: 'updateEmpRole',
+    }
+  ];
 
   inquirer.prompt(askToUpdate)
   .then((answers) => {
     // Create a query to insert new name for a department
-    var queryText = ``;
-    connection.query(queryText, [answers] , function (err, res) {
-      console.log(``);
+    queryText = `UPDATE employee SET role_id = ? WHERE id = ? `;
+    var empID = isExist(answers.updateEmp,refList);
+    connection.query(queryText, [answers.updateEmpRole, empID] , function (err, res) {
+      console.log(`The employee's role has been updated. check view all employee option`);
+      // Reset option lists to avoid stackoverflow
+      employeeOpt = [];
+      roleOption = [];
+      refList = [];
       mainMenu();
     });
   })
@@ -282,6 +308,12 @@ function updateEmployee() {
   });
    
 }
-function generateNameChoice(){
-  
+
+function isExist(fullName, nameList){
+  for(var k = 0; k < nameList.length; k++){
+    if (fullName === nameList[k].fullName){
+      // Return id
+      return nameList[k].id;
+    }
+  }
 }

@@ -59,6 +59,7 @@ Tutorials from Bootcamp course files
 * [A foreign key reference multiple tables examples](https://www.sqlservercentral.com/forums/topic/foreign-key-references-multiple-tables)
 * [mysql ECONNREFUSED](https://stackoverflow.com/questions/30266221/node-js-mysql-error-connect-econnrefused)
 * [JOIN IN](https://dba.stackexchange.com/questions/129023/selecting-data-from-another-table-using-a-foreign-key)
+* [Update sql](https://www.w3schools.com/sql/sql_update.asp)
 * [Random name generator](https://randomwordgenerator.com/name.php)
 
 [Return back to Title](#observer)
