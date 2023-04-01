@@ -39,6 +39,19 @@ source db/seeds.sql
 quit
 ```
 
+Once you enter the starter data into the table, you can run this command to view the databash
+
+```
+npm start
+// or
+node server.js
+```
+
+This walkthrough video will show you how to use Observer database.
+* [] ()
+
+
+
 ## [Credits](#table-of-content)
 Without these guidances, my website would not exist.
 
